@@ -53,31 +53,6 @@ static NSString *formatForLine2 = @"E MM/dd";
     return orig;
   }
 
-  // -(void)applyStyleAttributes:(id)arg1 toDisplayItem:(id)arg2
-  // {
-  //   %orig;
-  //   _UIStatusBarStringView *shortTimeView = MSHookIvar<_UIStatusBarStringView*>(self,"_shortTimeView");
-  //   shortTimeView.numberOfLines = 0;
-  //   shortTimeView.attributedText = [self getTimeInNewFormat];
-  // }
-
-  // -(id)applyUpdate:(id)arg1 toDisplayItem:(id)arg2
-  // {
-  //   id orig = %orig;
-  //   _UIStatusBarStringView *shortTimeView = MSHookIvar<_UIStatusBarStringView*>(self,"_shortTimeView");
-  //   shortTimeView.numberOfLines = 0;
-  //   shortTimeView.attributedText = [self getTimeInNewFormat];
-  //   return orig;
-  // }
-
-  // -(_UIStatusBarStringView *)shortTimeView
-  // {
-  //   _UIStatusBarStringView *orig = %orig;
-  //   orig.numberOfLines = 0;
-  //   orig.attributedText = [self getTimeInNewFormat];
-  //   return orig;
-  // }
-
   %new
   -(NSMutableAttributedString*)getTimeInNewFormat
   {
