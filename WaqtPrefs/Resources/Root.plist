@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+	<key>items</key>
+
+		<array>
+
+			<!-- <dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.p2kdev.sakal</string>
+				<key>key</key>
+				<string>enabled</string>
+				<key>label</key>
+				<string>Enabled</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.sakal.settingschanged</string>
+			</dict> -->
+
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Line 1 Options</string>
+				<key>footerText</key>
+				<string>Use the website https://nsdateformatter.com/ to try out different format specifiers!</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSEditTextCell</string>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>detail</key>
+				<string>PSDetailController</string>
+				<key>key</key>
+				<string>formatSpecifier1</string>
+				<key>label</key>
+				<string>1st Line Format</string>
+				<key>default</key>
+				<string>hh:mm</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSEditTextCell</string>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>detail</key>
+				<string>PSDetailController</string>
+				<key>key</key>
+				<string>fontSize1</string>
+				<key>label</key>
+				<string>FontSize</string>
+				<key>default</key>
+				<integer>12</integer>
+				<key>isNumeric</key>
+				<true/>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Line 2 Options</string>
+				<key>footerText</key>
+				<string>Use the website https://nsdateformatter.com/ to try out different format specifiers!</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSEditTextCell</string>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>detail</key>
+				<string>PSDetailController</string>
+				<key>key</key>
+				<string>formatSpecifier2</string>
+				<key>label</key>
+				<string>2nd Line Format</string>
+				<key>default</key>
+				<string>E MM/dd</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSEditTextCell</string>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>detail</key>
+				<string>PSDetailController</string>
+				<key>key</key>
+				<string>fontSize2</string>
+				<key>label</key>
+				<string>FontSize</string>
+				<key>default</key>
+				<integer>12</integer>
+				<key>isNumeric</key>
+				<true/>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Options</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Inter-line spacing</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSliderCell</string>
+				<key>default</key>
+				<real>1.0</real>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>key</key>
+				<string>spacing</string>
+				<key>max</key>
+				<real>20</real>
+				<key>min</key>
+				<real>0</real>
+				<key>showValue</key>
+				<true/>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<!-- <dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Vertical Offset</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSliderCell</string>
+				<key>default</key>
+				<real>0.0</real>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>key</key>
+				<string>offset</string>
+				<key>max</key>
+				<real>20</real>
+				<key>min</key>
+				<real>-20</real>
+				<key>showValue</key>
+				<true/>
+				<key>PostNotification</key>
+				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict> -->
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Respring</string>
+				<key>action</key>
+				<string>respring</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Support</string>
+				<key>footerText</key>
+				<string>Wish to donate? Donation link found on my twitter bio. Please click the above link to visit my twitter profile!</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>visitTwitter</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Follow me on Twitter @p2kdev</string>
+				<key>icon</key>
+				<string>twitter.png</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+				<key>footerText</key>
+				<string>© 2020 P2kDev (@p2kdev)</string>
+			</dict>
+
+	</array>
+
+	<key>title</key>
+	<string>Waqt</string>
+</dict>
+</plist>
