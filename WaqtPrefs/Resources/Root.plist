@@ -7,23 +7,6 @@
 
 		<array>
 
-			<!-- <dict>
-				<key>cell</key>
-				<string>PSSwitchCell</string>
-				<key>default</key>
-				<true/>
-				<key>defaults</key>
-				<string>com.p2kdev.sakal</string>
-				<key>key</key>
-				<string>enabled</string>
-				<key>label</key>
-				<string>Enabled</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.sakal.settingschanged</string>
-			</dict> -->
-
-
-
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
@@ -48,6 +31,21 @@
 				<string>hh:mm</string>
 				<key>PostNotification</key>
 				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.p2kdev.sakal</string>
+				<key>key</key>
+				<string>boldLine1</string>
+				<key>label</key>
+				<string>Bold Font</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -114,19 +112,29 @@
 				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
-
 			<dict>
 				<key>cell</key>
-				<string>PSGroupCell</string>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.p2kdev.sakal</string>
+				<key>key</key>
+				<string>boldLine2</string>
 				<key>label</key>
-				<string>Options</string>
+				<string>Bold Font</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
+
+
+
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
 				<key>label</key>
-				<string>Inter-line spacing</string>
+				<string>Line Spacing</string>
 			</dict>
 
 			<dict>
@@ -139,13 +147,50 @@
 				<key>key</key>
 				<string>spacing</string>
 				<key>max</key>
-				<real>20</real>
+				<real>5</real>
 				<key>min</key>
 				<real>0</real>
 				<key>showValue</key>
 				<true/>
 				<key>PostNotification</key>
 				<string>com.p2kdev.waqt.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Misc Options</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.p2kdev.sakal</string>
+				<key>key</key>
+				<string>hideLocation</string>
+				<key>label</key>
+				<string>Hide Location Indicator</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.sakal.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.p2kdev.sakal</string>
+				<key>key</key>
+				<string>hideBreadcrumbs</string>
+				<key>label</key>
+				<string>Hide Breadcrumbs</string>
+				<key>PostNotification</key>
+				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 			<!-- <dict>
