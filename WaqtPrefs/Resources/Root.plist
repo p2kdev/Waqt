@@ -29,8 +29,6 @@
 				<string>1st Line Format</string>
 				<key>default</key>
 				<string>hh:mm</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -39,13 +37,11 @@
 				<key>default</key>
 				<true/>
 				<key>defaults</key>
-				<string>com.p2kdev.sakal</string>
+				<string>com.p2kdev.waqt</string>
 				<key>key</key>
 				<string>boldLine1</string>
 				<key>label</key>
 				<string>Bold Font</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -63,8 +59,6 @@
 				<integer>12</integer>
 				<key>isNumeric</key>
 				<true/>
-				<key>PostNotification</key>
-				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -89,8 +83,6 @@
 				<string>2nd Line Format</string>
 				<key>default</key>
 				<string>E MM/dd</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -108,8 +100,6 @@
 				<integer>12</integer>
 				<key>isNumeric</key>
 				<true/>
-				<key>PostNotification</key>
-				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -118,13 +108,11 @@
 				<key>default</key>
 				<true/>
 				<key>defaults</key>
-				<string>com.p2kdev.sakal</string>
+				<string>com.p2kdev.waqt</string>
 				<key>key</key>
 				<string>boldLine2</string>
 				<key>label</key>
 				<string>Bold Font</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 
@@ -152,8 +140,6 @@
 				<real>0</real>
 				<key>showValue</key>
 				<true/>
-				<key>PostNotification</key>
-				<string>com.p2kdev.waqt.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -169,13 +155,11 @@
 				<key>default</key>
 				<true/>
 				<key>defaults</key>
-				<string>com.p2kdev.sakal</string>
+				<string>com.p2kdev.waqt</string>
 				<key>key</key>
 				<string>hideLocation</string>
 				<key>label</key>
 				<string>Hide Location Indicator</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -184,13 +168,11 @@
 				<key>default</key>
 				<true/>
 				<key>defaults</key>
-				<string>com.p2kdev.sakal</string>
+				<string>com.p2kdev.waqt</string>
 				<key>key</key>
 				<string>hideBreadcrumbs</string>
 				<key>label</key>
 				<string>Hide Breadcrumbs</string>
-				<key>PostNotification</key>
-				<string>com.p2kdev.sakal.settingschanged</string>
 			</dict>
 
 			<!-- <dict>
@@ -259,7 +241,7 @@
 				<key>footerAlignment</key>
 				<integer>1</integer>
 				<key>footerText</key>
-				<string>© 2020 P2kDev (@p2kdev)</string>
+				<string>© 2023 P2kDev (@p2kdev)</string>
 			</dict>
 
 	</array>

@@ -10,6 +10,11 @@ static bool boldLine2 = YES;
 static bool hideBreadcrumbs = YES;
 static bool hideLocation = YES;
 
+@interface FBSystemService : NSObject
+  +(id)sharedInstance;
+  -(void)exitAndRelaunch:(BOOL)arg1;
+@end
+
 @interface _UIStatusBarPillView : UIView
 @end
 
@@ -119,34 +124,65 @@ static bool hideLocation = YES;
       return nil;
     }
 
+    -(BOOL)canEnableDisplayItem:(id)arg1 fromData:(id) arg2 {
+      return NO;
+    }
+
   %end
 
 %end
 
 static void reloadSettings() {
 
-	NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.p2kdev.waqt.plist"];
-	if(prefs)
-	{
-		formatForLine1 = [prefs objectForKey:@"formatSpecifier1"] ? [[prefs objectForKey:@"formatSpecifier1"] stringValue] : formatForLine1;
-    formatForLine2 = [prefs objectForKey:@"formatSpecifier2"] ? [[prefs objectForKey:@"formatSpecifier2"] stringValue] : formatForLine2;
-		fontSize1 = [prefs objectForKey:@"fontSize1"] ? [[prefs objectForKey:@"fontSize1"] intValue] : fontSize1;
-    fontSize2 = [prefs objectForKey:@"fontSize2"] ? [[prefs objectForKey:@"fontSize2"] intValue] : fontSize2;
-    maxSpacing = [prefs objectForKey:@"spacing"] ? [[prefs objectForKey:@"spacing"] floatValue] : maxSpacing;
-    //offset = [prefs objectForKey:@"offset"] ? [[prefs objectForKey:@"offset"] floatValue] : offset;
-    boldLine1 = [prefs objectForKey:@"boldLine1"] ? [[prefs objectForKey:@"boldLine1"] boolValue] : boldLine1;
-    boldLine2 = [prefs objectForKey:@"boldLine2"] ? [[prefs objectForKey:@"boldLine2"] boolValue] : boldLine2;
-    hideBreadcrumbs = [prefs objectForKey:@"hideBreadcrumbs"] ? [[prefs objectForKey:@"hideBreadcrumbs"] boolValue] : hideBreadcrumbs;
-    hideLocation = [prefs objectForKey:@"hideLocation"] ? [[prefs objectForKey:@"hideLocation"] boolValue] : hideLocation;
-	}
+  static CFStringRef prefsKey = CFSTR("com.p2kdev.waqt");
+  CFPreferencesAppSynchronize(prefsKey);
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"formatSpecifier1", prefsKey))) {
+    formatForLine1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"formatSpecifier1", prefsKey)) stringValue];
+  }	
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"formatSpecifier2", prefsKey))) {
+    formatForLine2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"formatSpecifier2", prefsKey)) stringValue];
+  }	
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize1", prefsKey))) {
+    fontSize1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize1", prefsKey)) intValue];
+  }	    
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize2", prefsKey))) {
+    fontSize2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize2", prefsKey)) intValue];
+  }	  
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"spacing", prefsKey))) {
+    maxSpacing = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"spacing", prefsKey)) floatValue];
+  }	    
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine1", prefsKey))) {
+    boldLine1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine1", prefsKey)) boolValue];
+  }	    
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine2", prefsKey))) {
+    boldLine2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine2", prefsKey)) boolValue];
+  }	    
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideBreadcrumbs", prefsKey))) {
+    hideBreadcrumbs = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideBreadcrumbs", prefsKey)) boolValue];
+  }	  
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideLocation", prefsKey))) {
+    hideLocation = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideLocation", prefsKey)) boolValue];
+  }	      
+}
+
+static void respring(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+  [[%c(FBSystemService) sharedInstance] exitAndRelaunch:YES];
 }
 
 
 %ctor {
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadSettings, CFSTR("com.p2kdev.waqt.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-    reloadSettings();
-
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, respring, CFSTR("com.p2kdev.waqt.respring"), NULL, CFNotificationSuspensionBehaviorCoalesce);
     %init;
+    reloadSettings();
 
     if (hideBreadcrumbs)
       %init(HideBreadcrumbs);
