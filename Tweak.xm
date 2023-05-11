@@ -120,15 +120,19 @@ static bool hideLocation = YES;
 
   %hook _UIStatusBarIndicatorLocationItem
 
-    - (id) applyUpdate : (id) arg1 toDisplayItem : (id) arg2 {
-      return nil;
-    }
-
     -(BOOL)canEnableDisplayItem:(id)arg1 fromData:(id) arg2 {
       return NO;
     }
 
   %end
+
+  %hook _UIStatusBarIndicatorQuietModeItem
+
+    -(BOOL)canEnableDisplayItem:(id)arg1 fromData:(id) arg2 {
+      return NO;
+    }
+
+  %end  
 
 %end
 

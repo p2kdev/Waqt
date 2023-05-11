@@ -159,7 +159,7 @@
 				<key>key</key>
 				<string>hideLocation</string>
 				<key>label</key>
-				<string>Hide Location Indicator</string>
+				<string>Hide Location/Focus Indicator</string>
 			</dict>
 
 			<dict>
