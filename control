@@ -1,7 +1,7 @@
 Package: com.p2kdev.waqt
 Name: Waqt
 Depends: mobilesubstrate, preferenceloader
-Version: 1.2.1
+Version: 1.2.2
 Architecture: iphoneos-arm
 Description: Know more than just the current time!
 Maintainer: P2KDev <p2kdev@gmail.com>

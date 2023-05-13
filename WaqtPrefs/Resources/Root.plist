@@ -33,19 +33,6 @@
 
 			<dict>
 				<key>cell</key>
-				<string>PSSwitchCell</string>
-				<key>default</key>
-				<true/>
-				<key>defaults</key>
-				<string>com.p2kdev.waqt</string>
-				<key>key</key>
-				<string>boldLine1</string>
-				<key>label</key>
-				<string>Bold Font</string>
-			</dict>
-
-			<dict>
-				<key>cell</key>
 				<string>PSEditTextCell</string>
 				<key>defaults</key>
 				<string>com.p2kdev.waqt</string>
@@ -56,10 +43,50 @@
 				<key>label</key>
 				<string>FontSize</string>
 				<key>default</key>
-				<integer>12</integer>
-				<key>isNumeric</key>
+				<real>12</real>
+				<key>isDecimalPad</key>
 				<true/>
-			</dict>
+			</dict>			
+
+			<dict>
+				<key>cell</key>
+				<string>PSSegmentCell</string>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>key</key>
+				<string>line1FontWeight</string>
+				<key>default</key>
+				<integer>3</integer>
+				<key>validTitles</key>
+				<array>
+					<string>Regular</string>
+					<string>Medium</string>
+					<string>Semibold</string>
+					<string>Bold</string>
+					<string>Heavy</string>
+				</array>
+				<key>validValues</key>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>	
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false/>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>key</key>
+				<string>upperCaseLine1</string>
+				<key>label</key>
+				<string>Upper Cased String</string>
+			</dict>				
 
 			<dict>
 				<key>cell</key>
@@ -97,25 +124,50 @@
 				<key>label</key>
 				<string>FontSize</string>
 				<key>default</key>
-				<integer>12</integer>
-				<key>isNumeric</key>
+				<real>12</real>
+				<key>isDecimalPad</key>
 				<true/>
 			</dict>
 
 			<dict>
 				<key>cell</key>
-				<string>PSSwitchCell</string>
-				<key>default</key>
-				<true/>
+				<string>PSSegmentCell</string>
 				<key>defaults</key>
 				<string>com.p2kdev.waqt</string>
 				<key>key</key>
-				<string>boldLine2</string>
+				<string>line2FontWeight</string>
+				<key>default</key>
+				<integer>3</integer>
+				<key>validTitles</key>
+				<array>
+					<string>Regular</string>
+					<string>Medium</string>
+					<string>Semibold</string>
+					<string>Bold</string>
+					<string>Heavy</string>
+				</array>
+				<key>validValues</key>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>			
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false/>
+				<key>defaults</key>
+				<string>com.p2kdev.waqt</string>
+				<key>key</key>
+				<string>upperCaseLine2</string>
 				<key>label</key>
-				<string>Bold Font</string>
-			</dict>
-
-
+				<string>Upper Cased String</string>
+			</dict>			
 
 
 			<dict>

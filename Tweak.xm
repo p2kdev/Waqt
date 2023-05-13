@@ -1,12 +1,14 @@
-static int fontSize1 = 12;
-static int fontSize2 = 12;
+static double fontSize1 = 12;
+static double fontSize2 = 12;
 static float maxSpacing = 1.0;
 static int numberOfLines = 2;
 //static float offset = 0.0;
 static NSString *formatForLine1 = @"hh:mm";
 static NSString *formatForLine2 = @"E MM/dd";
-static bool boldLine1 = YES;
-static bool boldLine2 = YES;
+static int line1FontWeight = 3;
+static int line2FontWeight = 3;
+static bool upperCaseLine1 = NO;
+static bool upperCaseLine2 = NO;
 static bool hideBreadcrumbs = YES;
 static bool hideLocation = YES;
 
@@ -30,6 +32,31 @@ static bool hideLocation = YES;
   -(void)setPillTimeView:(_UIStatusBarStringView *)arg1 ;
   -(NSMutableAttributedString*)getTimeInNewFormat;
 @end
+
+static UIFontWeight getFontWeight(int type)
+{
+  switch(type)
+  {
+    case 0:
+      return UIFontWeightRegular;
+      break;
+    case 1:
+      return UIFontWeightMedium;
+      break;
+    case 2:
+      return UIFontWeightSemibold;
+      break;
+    case 3:
+      return UIFontWeightBold;
+      break;  
+    case 4:
+      return UIFontWeightHeavy;
+      break;        
+    default:
+      return UIFontWeightBold;
+      break;                      
+  }
+}
 
 %hook _UIStatusBarTimeItem
 
@@ -56,11 +83,10 @@ static bool hideLocation = YES;
       [formatter setDateFormat:formatForLine1];
       NSString *newTimeLine1 = [formatter stringFromDate:[NSDate date]];
 
-      UIFont *font;
-      if (boldLine1)
-        font = [UIFont boldSystemFontOfSize : fontSize1];
-      else
-        font = [UIFont systemFontOfSize : fontSize1];
+      if (upperCaseLine1)
+        newTimeLine1 = [newTimeLine1 uppercaseString];
+
+      UIFont *font = [UIFont systemFontOfSize : fontSize1 weight:getFontWeight(line1FontWeight)];
 
       NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
       [paragraphStyle setMinimumLineHeight:font.ascender + maxSpacing];
@@ -81,11 +107,10 @@ static bool hideLocation = YES;
       [formatter setDateFormat:formatForLine2];
       NSString *newTimeLine2 = [NSString stringWithFormat:@"\n%@",[formatter stringFromDate:[NSDate date]]];
 
-      UIFont *font;
-      if (boldLine2)
-        font = [UIFont boldSystemFontOfSize : fontSize2];
-      else
-        font = [UIFont systemFontOfSize : fontSize2];
+      if (upperCaseLine2)
+        newTimeLine2 = [newTimeLine2 uppercaseString];      
+
+      UIFont *font = [UIFont systemFontOfSize : fontSize2 weight:getFontWeight(line2FontWeight)];
 
       NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
       [paragraphStyle setMinimumLineHeight:font.ascender + maxSpacing];
@@ -150,24 +175,32 @@ static void reloadSettings() {
   }	
 
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize1", prefsKey))) {
-    fontSize1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize1", prefsKey)) intValue];
+    fontSize1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize1", prefsKey)) doubleValue];
   }	    
 
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize2", prefsKey))) {
-    fontSize2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize2", prefsKey)) intValue];
+    fontSize2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"fontSize2", prefsKey)) doubleValue];
   }	  
 
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"spacing", prefsKey))) {
     maxSpacing = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"spacing", prefsKey)) floatValue];
   }	    
 
-  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine1", prefsKey))) {
-    boldLine1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine1", prefsKey)) boolValue];
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"line1FontWeight", prefsKey))) {
+    line1FontWeight = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"line1FontWeight", prefsKey)) intValue];
+  }	     
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"line2FontWeight", prefsKey))) {
+    line2FontWeight = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"line2FontWeight", prefsKey)) intValue];
+  }	 
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"upperCaseLine1", prefsKey))) {
+    upperCaseLine1 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"upperCaseLine1", prefsKey)) boolValue];
   }	    
 
-  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine2", prefsKey))) {
-    boldLine2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"boldLine2", prefsKey)) boolValue];
-  }	    
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"upperCaseLine2", prefsKey))) {
+    upperCaseLine2 = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"upperCaseLine2", prefsKey)) boolValue];
+  }	     
 
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideBreadcrumbs", prefsKey))) {
     hideBreadcrumbs = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideBreadcrumbs", prefsKey)) boolValue];
