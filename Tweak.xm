@@ -11,6 +11,7 @@ static bool upperCaseLine1 = NO;
 static bool upperCaseLine2 = NO;
 static bool hideBreadcrumbs = YES;
 static bool hideLocation = YES;
+static float center = 21.99;
 
 @interface FBSystemService : NSObject
   +(id)sharedInstance;
@@ -31,6 +32,8 @@ static bool hideLocation = YES;
   -(void)setShortTimeView:(_UIStatusBarStringView *)arg1 ;
   -(void)setPillTimeView:(_UIStatusBarStringView *)arg1 ;
   -(NSMutableAttributedString*)getTimeInNewFormat;
+  @property (nonatomic,retain) NSTimer* waqtSecondsTimer;
+  -(void)updateShortTimeView;
 @end
 
 static UIFontWeight getFontWeight(int type)
@@ -58,16 +61,42 @@ static UIFontWeight getFontWeight(int type)
   }
 }
 
+%hook _UIStatusBarStringView
+
+  -(void)setCenter:(CGPoint)arg1
+  {
+    if ([self.text containsString:@":"])
+      arg1.y = center;
+
+    %orig;
+  }
+
+%end
+
 %hook _UIStatusBarTimeItem
+  %property (nonatomic,retain) NSTimer* waqtSecondsTimer;
 
   -(id)_applyUpdate:(id)arg1 toDisplayItem:(id)arg2
   {
+    if (self.waqtSecondsTimer)
+      [self.waqtSecondsTimer invalidate];
+
+    self.waqtSecondsTimer = nil;
     id orig = %orig;
+    [self updateShortTimeView];
+    //Only add timer if the user specified seconds in the format
+    if (([formatForLine1 containsString:@":ss"]) || ([formatForLine2 containsString:@":ss"]))
+      self.waqtSecondsTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateShortTimeView) userInfo:nil repeats:YES];
+    return orig;
+  }
+
+  %new
+  -(void)updateShortTimeView
+  {
     _UIStatusBarStringView *shortTimeView = MSHookIvar<_UIStatusBarStringView*>(self,"_shortTimeView");
     shortTimeView.numberOfLines = numberOfLines;
     shortTimeView.attributedText = [self getTimeInNewFormat];
     shortTimeView.adjustsFontSizeToFitWidth = YES;
-    return orig;
   }
 
   %new
@@ -208,7 +237,11 @@ static void reloadSettings() {
 
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideLocation", prefsKey))) {
     hideLocation = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideLocation", prefsKey)) boolValue];
-  }	      
+  }	
+
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"center", prefsKey))) {
+    center = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"center", prefsKey)) floatValue];
+  }	         
 }
 
 static void respring(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
