@@ -2,7 +2,7 @@ static double fontSize1 = 12;
 static double fontSize2 = 12;
 static float maxSpacing = 1.0;
 static int numberOfLines = 2;
-//static float offset = 0.0;
+
 static NSString *formatForLine1 = @"hh:mm";
 static NSString *formatForLine2 = @"E MM/dd";
 static int line1FontWeight = 3;
@@ -11,6 +11,7 @@ static bool upperCaseLine1 = NO;
 static bool upperCaseLine2 = NO;
 static bool hideBreadcrumbs = YES;
 static bool hideLocation = YES;
+static bool adjustCenter = NO;
 static float center = 21.99;
 
 @interface FBSystemService : NSObject
@@ -61,15 +62,19 @@ static UIFontWeight getFontWeight(int type)
   }
 }
 
-%hook _UIStatusBarStringView
+%group AdjustCenter
 
-  -(void)setCenter:(CGPoint)arg1
-  {
-    if ([self.text containsString:@":"])
-      arg1.y = center;
+  %hook _UIStatusBarStringView
 
-    %orig;
-  }
+    -(void)setCenter:(CGPoint)arg1
+    {
+      if ([self.text containsString:@":"])
+        arg1.y = center;
+
+      %orig;
+    }
+
+  %end
 
 %end
 
@@ -239,6 +244,10 @@ static void reloadSettings() {
     hideLocation = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"hideLocation", prefsKey)) boolValue];
   }	
 
+  if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"adjustCenter", prefsKey))) {
+    adjustCenter = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"adjustCenter", prefsKey)) boolValue];
+  }
+
   if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"center", prefsKey))) {
     center = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"center", prefsKey)) floatValue];
   }	         
@@ -247,7 +256,6 @@ static void reloadSettings() {
 static void respring(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
   [[%c(FBSystemService) sharedInstance] exitAndRelaunch:YES];
 }
-
 
 %ctor {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, respring, CFSTR("com.p2kdev.waqt.respring"), NULL, CFNotificationSuspensionBehaviorCoalesce);
@@ -259,4 +267,7 @@ static void respring(CFNotificationCenterRef center, void *observer, CFStringRef
 
     if (hideLocation)
       %init(HideLocation);
+
+    if (adjustCenter)
+      %init(AdjustCenter);
 }
